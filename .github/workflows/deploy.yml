@@ -11,8 +11,10 @@ jobs:
   test:
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.7flot.mongodb.net
-      MONGODB_USERNAME: bizoncristi
-      MONGODB_PASSWORD: Wxi1AUpSqgN6NtZx
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      repo_MONGODB_USERNAME: ${{ secrets.repo_MONGODB_USERNAME }}
+      repo_MONGODB_PASSWORD: ${{ secrets.repo_MONGODB_PASSWORD }}
       PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
@@ -33,7 +35,9 @@ jobs:
       - name: Output information
         run: |
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
-          echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
+          echo "MONGODB_PASSWORD: ${{ env.MONGODB_PASSWORD }}"
+          echo "repo_MONGODB_USERNAME: ${{ env.repo_MONGODB_USERNAME }}"
+          echo "repo_MONGODB_PASSWORD: ${{ env.repo_MONGODB_PASSWORD }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -41,3 +45,7 @@ jobs:
       - name: Output information
         run: |        
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_PASSWORD: ${{ env.MONGODB_PASSWORD }}"
+          echo "repo_MONGODB_USERNAME: ${{ env.repo_MONGODB_USERNAME }}"
+          echo "repo_MONGODB_PASSWORD: ${{ env.repo_MONGODB_PASSWORD }}"
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
