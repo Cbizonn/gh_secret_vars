@@ -70,7 +70,7 @@ jobs:
           echo "repo_MONGODB_USERNAME: ${{ env.repo_MONGODB_USERNAME }}"
           echo "repo_MONGODB_PASSWORD: ${{ env.repo_MONGODB_PASSWORD }}"
   deploy:
-    needs: test
+    needs: [test, test_netflix]
     runs-on: ubuntu-latest
     steps:
       - name: Output information
